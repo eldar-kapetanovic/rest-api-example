@@ -20,7 +20,7 @@ Install Angular CLI
 [Download project](https://github.com/eldar-kapetanovic/rest-api-example/archive/master.zip) 
 or clone project using `git clone https://github.com/eldar-kapetanovic/rest-api-example.git` command.
 
-##Setup project and Install the dependencies
+## Setup project and Install the dependencies
 
 If you download .zip file, extract archive first.
 Open terminal (Command prompt)
