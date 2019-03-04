@@ -22,7 +22,7 @@
             <button *ngIf="!authenticated" mat-stroked-button (click)="openLoginDialog()" color="primary">
                 LOGIN
             </button>
-            <button *ngIf="authenticated" mat-stroked-button (click)="onLogout()" color="primary">
+            <button *ngIf="authenticated" mat-stroked-button (click)="onConfirmLogout()" color="primary">
                 LOGOUT
             </button>
         </div>

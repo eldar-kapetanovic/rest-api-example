@@ -13,6 +13,8 @@ import { StoreContext } from './models/store-context.model';
 import { LoginDialogComponent } from './componets/login-dialog/login-dialog.component';
 import { PostService } from './services/post.service';
 import { Post } from './models/post.model';
+import { ConfirmDialogData } from './models/confirm-dialog-data.model';
+import { ConfirmActionComponent } from './componets/confirm-action/confirm-action.component';
 
 
 @Component({
@@ -26,6 +28,7 @@ export class AppComponent implements OnInit {
     addPost = false;
     authenticated = false;
     posts: Post[] = [];
+    actionConfirmed = false;
     downloadJsonHref: SafeUrl;
 
     constructor(
@@ -108,6 +111,28 @@ export class AppComponent implements OnInit {
             height: '350px',
             data: { username: '', password: '' }
         });
+    }
+
+    onConfirmLogout() {
+        const confirmPostDeletionData = new ConfirmDialogData({
+            title: 'Confirm Logout',
+            message: `Are you sure you want to <b>"Logout"</b>?`,
+            actionConfirmed: false
+        });
+        const matDialogReference = this.matDialog.open(ConfirmActionComponent, {
+            width: '370px',
+            height: '270px',
+            data: confirmPostDeletionData
+        });
+
+        matDialogReference.afterClosed()
+            .subscribe(
+                () => {
+                    if (matDialogReference.componentInstance.data && matDialogReference.componentInstance.data.actionConfirmed === true) {
+                        this.onLogout();
+                    }
+                }
+            );
     }
 
     onLogin(username: string, password: string) {

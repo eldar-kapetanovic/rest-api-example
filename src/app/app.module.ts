@@ -15,6 +15,7 @@ import { EditPostComponent } from './componets/edit-post/edit-post.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { LoginDialogComponent } from './componets/login-dialog/login-dialog.component';
 import { PendingChangesGuard } from './services/pending-changes.guard';
+import { ConfirmActionComponent } from './componets/confirm-action/confirm-action.component';
 
 
 const appRoutes: Routes = [
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
         PostComponent,
         PostDetailsComponent,
         EditPostComponent,
-        LoginDialogComponent
+        LoginDialogComponent,
+        ConfirmActionComponent
     ],
     imports: [
         CommonModule,
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes)
     ],
     entryComponents: [
-        LoginDialogComponent
+        LoginDialogComponent,
+        ConfirmActionComponent
     ],
     providers: [
         PendingChangesGuard,

@@ -4,7 +4,7 @@
             *ngIf="post.title != undefined"
             [post]="post"
             [authenticated]="authenticated"
-            (deletePost)="onDeletePost($event)">
+            (deletePost)="onConfirmPostDeletion($event)">
     </app-post>
     </ng-container>
 </div>

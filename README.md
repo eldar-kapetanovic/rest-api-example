@@ -1,27 +1,65 @@
-# RestAPIExample
+# rest-api-example
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
 
-## Development server
+## Setup environment for Angular
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+[Download and install Node.js with npm](https://nodejs.org/en/)
 
-## Code scaffolding
+Open terminal (Command prompt)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Check if Node.js is installed correctly:
+`node -v`
 
-## Build
+Check if npm is installed correctly:
+`npm -v`
 
+Install Angular CL
+`npm install -g @angular/cli`
+
+## Clone or Download project
+
+[Download project](https://github.com/eldar-kapetanovic/rest-api-example/archive/master.zip) 
+or clone project using `git clone https://github.com/eldar-kapetanovic/rest-api-example.git` command
+
+## Run project locally (Development server)
+
+Open terminal (Command prompt)
+Navigate to project directory `cd <path/to/project>/rest-api-example`
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
+
+## Build project for deployment
+
+Open terminal (Command prompt)
+Navigate to project directory `cd <path/to/project>/rest-api-example`
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+## About project
+Project is based on meaningless data from [JSONPlaceholder](https://jsonplaceholder.typicode.com/) page. Two set of data `/posts` and `/comments` 
+are used for this project. Sample data is formatted in order to have child list of comments in post object. This data then was saved to `Google
+Firebase` database. 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Read access is granted for all, so anyone can read posts and comments. Only authenticated users can edit data. For login application uses 
+Email and password based authentication through Firebase SDK. 
 
-## Running end-to-end tests
+Test account for this application is:
+`test@test.com`
+`Test1234`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Application contain 7 components. `app.component` for Firebase SDK initialization, initial app store data and global actions (Login, Logout, 
+Export...). `login-dialog.component` for Login functionality. `posts.component` parent component for displaying posts with usage of 
+`post.component`. `post-details.component` and `edit.post.component` for viewing and editing post and related comment data. 
+`confirm-action.component` is used for Delete and Logout actions confirmation.
 
-## Further help
+Application uses store to keep data on application level. Changes on data are coordinated through this class. By subscribing to state components
+are able to track changes on post / comments data. Store is also used for tracking of authentication state of user.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Post service `post.service` is used for retrieving and saving data from Goggle Firebase database using GET and PUT REST operations. 
+`auth.interceptor` is used to add authentication key to PUT operation. `pending-changes.guard` is used to warn user for unsaved data when he 
+tries to leave page without saving all data.
+
+Application contains 2 modules. `material-components.module` for sharing Angular Material components. `app.module` is module used for declaring
+and providing components and also for managing routes for Angular Router Module.
+
+Through this application users can access posts and comments data, and they can export this data in JSON format by clicking `EXPORT TO JSON` on 
+main page. Authenticated users can add, edit and delete all data.

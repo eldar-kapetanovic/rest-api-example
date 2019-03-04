@@ -22,7 +22,6 @@ export class EditPostComponent implements OnInit, OnDestroy, ComponentCanDeactiv
     post: Post;
     postForm: FormGroup;
     commentForms: FormGroup[] = [];
-    authenticated = false;
     unsavedData = false;
     firebaseAuthStateUnsubscribe: firebase.Unsubscribe;
 
@@ -35,7 +34,6 @@ export class EditPostComponent implements OnInit, OnDestroy, ComponentCanDeactiv
     ) { }
 
     ngOnInit() {
-        this.authenticated = this.appContext.state.authenticated;
         this.firebaseAuthStateUnsubscribe = firebase.auth().onAuthStateChanged(
             (stateChanged: firebase.User) => {
                 if (stateChanged) {

@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>
+    {{ data.title || 'Confirm Action'}}
+</h1>
+<div mat-dialog-content class="message-area"
+    [innerHTML]="data.message || 'Please confirm.'">
+</div>
+<div mat-dialog-actions class="button-group">
+    <button mat-stroked-button color="default" type="button" (click)="onCancel()">CANCEL</button>
+    <button mat-stroked-button color="warn" type="button" (click)="onConfirm()">CONFIRM</button>
+</div>

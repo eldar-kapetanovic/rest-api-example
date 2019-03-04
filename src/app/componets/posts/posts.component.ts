@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 import { filter, distinctUntilChanged } from 'rxjs/operators';
 
@@ -7,6 +8,8 @@ import { Comment } from '../../models/comment.model';
 import { AppContextStore } from '../../store/app-context.store';
 import { StoreContext } from '../../models/store-context.model';
 import { PostService } from '../../services/post.service';
+import { ConfirmActionComponent } from '../confirm-action/confirm-action.component';
+import { ConfirmDialogData } from '../../models/confirm-dialog-data.model';
 
 
 @Component({
@@ -22,7 +25,8 @@ export class PostsComponent implements OnInit, OnDestroy {
 
     constructor(
         private appContext: AppContextStore,
-        private postService: PostService
+        private postService: PostService,
+        private matDialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -61,5 +65,27 @@ export class PostsComponent implements OnInit, OnDestroy {
                     }
                 );
         }
+    }
+
+    onConfirmPostDeletion(post: Post) {
+        const confirmPostDeletionData = new ConfirmDialogData({
+            title: 'Confirm Post Delete',
+            message: `Are you sure you want to delete: <b>"${post.title}"</b> Post?`,
+            actionConfirmed: false
+        });
+        const matDialogReference = this.matDialog.open(ConfirmActionComponent, {
+            width: '370px',
+            height: '270px',
+            data: confirmPostDeletionData
+        });
+
+        matDialogReference.afterClosed()
+            .subscribe(
+                () => {
+                    if (matDialogReference.componentInstance.data && matDialogReference.componentInstance.data.actionConfirmed === true) {
+                        this.onDeletePost(post);
+                    }
+                }
+            );
     }
 }

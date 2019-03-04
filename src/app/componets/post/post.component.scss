@@ -26,3 +26,7 @@
 .post-link {
     cursor: pointer;
 }
+
+.post-link:hover .mat-card-title, .post-link:hover .mat-card-subtitle {
+    text-decoration: underline;
+}
