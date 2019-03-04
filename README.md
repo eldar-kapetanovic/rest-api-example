@@ -40,7 +40,7 @@ are used for this project. Sample data is formatted in order to have child list 
 Firebase` database. 
 
 Read access is granted for all, so anyone can read posts and comments. Only authenticated users can edit data. For login application uses 
-Email and password based authentication from Firebase SDK. 
+"Email and password based authentication" from Firebase SDK. 
 
 Test account for this application is:
 username: `test@test.com`
@@ -49,13 +49,13 @@ password: `Test1234`
 Application contain 7 components. `app.component` is used for Firebase SDK initialization, initial app store data and global actions (Login, Logout, 
 Export...). `login-dialog.component` for Login functionality. `posts.component` is parent component for displaying posts with usage of 
 `post.component`. `post-details.component` and `edit.post.component` for viewing and editing post and related comment data. 
-`confirm-action.component` is used for Delete and Logout actions confirmation.
+`confirm-action.component` is used for confirmation of Delete and Logout actions.
 
-Application uses store to keep data on application level. Changes on data are coordinated through this class. By subscribing to state, components
-are able to track changes on post / comments data. Store is also used for tracking of authentication state of user.
+Application uses "store" to keep data on application level. Changes on data are coordinated through this class. By subscribing to state, components
+are able to track changes on post/comments data. "Store" is also used for tracking users authentication state.
 
 Post service `post.service` is used for retrieving and saving data from Google Firebase database using GET and PUT REST operations. 
-`auth.interceptor` is used to add authentication key to PUT operation. `pending-changes.guard` is used to warn user for unsaved data when he 
+`auth.interceptor` is used to add authentication key to PUT operation. `pending-changes.guard` is used to warn user of unsaved data when he/she 
 tries to leave page without saving all data.
 
 Application contains 2 modules. `material-components.module` for sharing Angular Material components. `app.module` is module used for declaring
