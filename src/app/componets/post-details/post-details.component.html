@@ -1,0 +1,38 @@
+<mat-card class="post-detail-card">
+    <mat-card-header class="width-100">
+        <mat-card-title class="flex-row width-100">
+            <span>Post</span>
+            <span class="flex-empty-space"></span>
+            <a *ngIf="authenticated && post" [routerLink]="['/', 'edit-post', post.postIndex]" mat-icon-button color="primary">
+                <mat-icon>
+                    edit
+                </mat-icon>
+            </a>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="post-details-content">
+        <div class="post-details-table">
+            <h2>{{ post?.title }}</h2>
+            {{ post?.body }}
+        </div>
+    </mat-card-content>
+</mat-card>
+<mat-card class="post-detail-card">
+    <mat-card-header>
+        <mat-card-title>
+            Comments
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-card *ngFor="let comment of post?.comments" class="post-detail-card">
+            <mat-card-header>
+                <mat-card-title>
+                    {{ comment.name }}
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="post-details-content">
+                {{ comment.body }}
+            </mat-card-content>
+        </mat-card>
+    </mat-card-content>
+</mat-card>

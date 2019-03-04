@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Login</h1>
+<form #loginForm="ngForm" (ngSubmit)="onLogin()">
+    <div mat-dialog-content>
+        <mat-form-field class="width-100">
+            <input matInput placeholder="Username" name="username" [required]="true" [(ngModel)]="data.username">
+        </mat-form-field>
+        <mat-form-field class="width-100">
+            <input matInput type="password" placeholder="Password" name="password" [required]="true" [(ngModel)]="data.password">
+        </mat-form-field>
+        <div class="error-area">
+            {{ errorMessage }}
+        </div>
+    </div>
+    <div mat-dialog-actions class="button-group">
+        <button mat-stroked-button color="default" type="button" (click)="onCancel()">Cancel</button>
+        <button mat-stroked-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+    </div>
+</form>

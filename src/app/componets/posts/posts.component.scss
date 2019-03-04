@@ -1,0 +1,10 @@
+.posts-grid {
+    display: flex;
+    display: grid;
+    /* autoprefixer: off */
+    grid-template-columns: repeat(auto-fit, 390px);
+    justify-content: space-evenly;
+    border-left: solid 1px lightgrey;
+    border-right: solid 1px lightgray;
+    box-shadow: 0 2px 5px lightgrey;
+}

@@ -1,0 +1,21 @@
+<mat-card class="post-card">
+    <mat-card-header [routerLink]="['/', 'post-details', post.postIndex]" class="post-link">
+        <div mat-card-avatar class="post-header-image"></div>
+        <mat-card-title>
+            {{ post.title }}
+        </mat-card-title>
+        <mat-card-subtitle>
+            {{ post.comments?.length || 0 }} comments
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            {{ post.body }}
+        </p>
+    </mat-card-content>
+    <div class="post-empty-space"></div>
+    <mat-card-actions *ngIf="authenticated" class="post-commands">
+        <button mat-stroked-button (click)="onDeletePost()" color="warn">DELETE</button>
+        <a mat-stroked-button [routerLink]="['/', 'edit-post', post.postIndex]" color="primary">EDIT</a>
+    </mat-card-actions>
+</mat-card>

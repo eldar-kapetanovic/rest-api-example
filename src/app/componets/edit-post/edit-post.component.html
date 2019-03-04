@@ -1,0 +1,52 @@
+<mat-card *ngIf="ready" class="post-detail-card">
+        <form [formGroup]="postForm" (ngSubmit)="onSubmitPost()">
+            <mat-card-header>
+                <mat-card-title>
+                    Post
+                </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="post-details-content">
+                <div class="post-details-table">
+                    <mat-form-field class="full-width-form-field">
+                        <input matInput placeholder="Title" formControlName="title">
+                    </mat-form-field>
+                    <mat-form-field class="full-width-form-field">
+                        <textarea matInput placeholder="Post" rows="5" formControlName="body"></textarea>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+            <mat-card-actions class="post-details-commands">
+                <button mat-stroked-button type="button" [disabled]="post.postIndex == undefined" (click)="onDeletePost()" color="warn">DELETE</button>
+                <button mat-stroked-button type="button" [disabled]="post.postIndex == undefined" (click)="onCancelPost()" color="default">CANCEL</button>
+                <button mat-stroked-button type="submit" color="primary" [disabled]="!postForm.valid">SAVE</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
+    <mat-card *ngIf="ready" class="post-detail-card">
+        <mat-card-header>
+            <mat-card-title class="flex-row">
+                <span>Comments</span>
+                <span class="flex-empty-space"></span>
+                <button mat-mini-fab [disabled]="post.postIndex == undefined" (click)="onAddComment()" color="primary">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-card *ngFor="let commentForm of commentForms; let i = index" class="post-detail-card">
+                <form *ngIf="commentForm" [formGroup]="commentForm" (ngSubmit)="onSubmitComment(commentForm)">
+                    <mat-form-field class="full-width-form-field">
+                        <input matInput placeholder="Title" formControlName="name">
+                    </mat-form-field>
+                    <mat-form-field class="full-width-form-field">
+                        <textarea matInput placeholder="Post" rows="5" formControlName="body"></textarea>
+                    </mat-form-field>
+                    <mat-card-actions class="post-details-commands">
+                        <button mat-stroked-button type="button" (click)="onDeleteComment(i)" color="warn">DELETE</button>
+                        <button mat-stroked-button type="button" (click)="onCancelComment(i)" color="default">CANCEL</button>
+                        <button mat-stroked-button color="primary" [disabled]="!commentForm.valid">SAVE</button>
+                    </mat-card-actions>
+                </form>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>

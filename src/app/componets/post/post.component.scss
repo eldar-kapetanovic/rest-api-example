@@ -1,0 +1,28 @@
+.post-card {
+    display: flex;
+    flex-flow: column;
+    max-width: 390px;
+    margin: 0.8rem;
+    height: calc(100% - 1.64rem);
+}
+
+.post-header-image {
+    background-image: url('../../../assets/images/posts76-icon.png');
+    background-size: cover;
+}
+
+.post-empty-space {
+    flex: 1 1 auto;
+}
+
+.post-commands {
+    text-align: right;
+}
+
+.post-commands button:not(:last-child) {
+    margin-right: 0.8rem;
+}
+
+.post-link {
+    cursor: pointer;
+}

@@ -1,0 +1,17 @@
+.button-group {
+    width: 100%;
+    justify-content: flex-end;
+    margin-right: 2rem;
+}
+
+.button-group button:not(:last-child) {
+    margin-right: 25px;
+}
+
+.error-area {
+    width: 100%;
+    height: 70px;
+    color: red;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 14px;
+}
