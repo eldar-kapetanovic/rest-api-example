@@ -21,6 +21,7 @@ export class PostsComponent implements OnInit, OnDestroy {
     posts: Post[];
     comments: Comment[];
     authenticated = false;
+    saving = false;
     stateSubscription: Subscription;
 
     constructor(
@@ -51,7 +52,8 @@ export class PostsComponent implements OnInit, OnDestroy {
 
     onDeletePost(post: Post) {
         let posts;
-        if (this.authenticated) {
+        if (this.authenticated && !this.saving) {
+            this.saving = true;
             posts = this.appContext.state.posts.map(
                 (statePost: Post) => (new Post(statePost))
             );
@@ -62,6 +64,10 @@ export class PostsComponent implements OnInit, OnDestroy {
                 .subscribe(
                     (updatedPosts: Post[]) => {
                         this.appContext.setPosts(updatedPosts);
+                        this.saving = false;
+                    },
+                    (error) => {
+                        this.saving = false;
                     }
                 );
         }

@@ -7,11 +7,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 [Download and install Node.js with npm](https://nodejs.org/en/)
 
 Open terminal (Command prompt)
-
-Check if Node.js is installed correctly:
+- Check if Node.js is installed correctly:
 `node -v`
-
-Check if npm is installed correctly:
+- Check if npm is installed correctly:
 `npm -v`
 
 Install Angular CLI
@@ -22,10 +20,17 @@ Install Angular CLI
 [Download project](https://github.com/eldar-kapetanovic/rest-api-example/archive/master.zip) 
 or clone project using `git clone https://github.com/eldar-kapetanovic/rest-api-example.git` command.
 
+##Setup project and Install the dependencies
+
+If you download .zip file, extract archive first.
+Open terminal (Command prompt)
+Navigate to project directory `cd <path/to/project>/rest-api-example`.
+Run `npm install` to install the dependencies.
+
 ## Run project locally (Development server)
 
 Open terminal (Command prompt)
-Navigate to project directory `cd <path/to/project>/rest-api-example`
+Navigate to project directory `cd <path/to/project>/rest-api-example`.
 Run `ng serve` for a dev server. Open `http://localhost:4200/` in your Web browser.
 
 ## Build project for deployment

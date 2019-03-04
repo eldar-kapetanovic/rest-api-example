@@ -16,9 +16,29 @@
                 </div>
             </mat-card-content>
             <mat-card-actions class="post-details-commands">
-                <button mat-stroked-button type="button" [disabled]="post.postIndex == undefined" (click)="onDeletePost()" color="warn">DELETE</button>
-                <button mat-stroked-button type="button" [disabled]="post.postIndex == undefined" (click)="onCancelPost()" color="default">CANCEL</button>
-                <button mat-stroked-button type="submit" color="primary" [disabled]="!postForm.valid">SAVE</button>
+                <button
+                    mat-stroked-button
+                    type="button"
+                    [disabled]="post.postIndex == undefined || saving"
+                    (click)="onDeletePost()"
+                    color="warn">
+                    DELETE
+                </button>
+                <button
+                    mat-stroked-button
+                    type="button"
+                    [disabled]="post.postIndex == undefined || saving"
+                    (click)="onCancelPost()"
+                    color="default">
+                    CANCEL
+                </button>
+                <button
+                    mat-stroked-button
+                    type="submit"
+                    color="primary"
+                    [disabled]="!postForm.valid || saving">
+                    SAVE
+                </button>
             </mat-card-actions>
         </form>
     </mat-card>
@@ -27,7 +47,11 @@
             <mat-card-title class="flex-row">
                 <span>Comments</span>
                 <span class="flex-empty-space"></span>
-                <button mat-mini-fab [disabled]="post.postIndex == undefined" (click)="onAddComment()" color="primary">
+                <button
+                    mat-mini-fab
+                    [disabled]="post.postIndex == undefined || saving"
+                    (click)="onAddComment()"
+                    color="primary">
                     <mat-icon>add</mat-icon>
                 </button>
             </mat-card-title>
@@ -42,9 +66,28 @@
                         <textarea matInput placeholder="Post" rows="5" formControlName="body"></textarea>
                     </mat-form-field>
                     <mat-card-actions class="post-details-commands">
-                        <button mat-stroked-button type="button" (click)="onDeleteComment(i)" color="warn">DELETE</button>
-                        <button mat-stroked-button type="button" (click)="onCancelComment(i)" color="default">CANCEL</button>
-                        <button mat-stroked-button color="primary" [disabled]="!commentForm.valid">SAVE</button>
+                        <button
+                            mat-stroked-button
+                            type="button"
+                            (click)="onDeleteComment(i)"
+                            [disabled]="saving"
+                            color="warn">
+                            DELETE
+                        </button>
+                        <button
+                            mat-stroked-button
+                            type="button"
+                            (click)="onCancelComment(i)"
+                            [disabled]="saving"
+                            color="default">
+                            CANCEL
+                        </button>
+                        <button
+                            mat-stroked-button
+                            color="primary"
+                            [disabled]="!commentForm.valid || saving">
+                            SAVE
+                        </button>
                     </mat-card-actions>
                 </form>
             </mat-card>

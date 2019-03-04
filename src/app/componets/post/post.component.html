@@ -15,7 +15,18 @@
     </mat-card-content>
     <div class="post-empty-space"></div>
     <mat-card-actions *ngIf="authenticated" class="post-commands">
-        <button mat-stroked-button (click)="onDeletePost()" color="warn">DELETE</button>
-        <a mat-stroked-button [routerLink]="['/', 'edit-post', post.postIndex]" color="primary">EDIT</a>
+        <button
+            mat-stroked-button
+            (click)="onDeletePost()"
+            [disabled]="saving"
+            color="warn">
+            DELETE
+        </button>
+        <a
+            mat-stroked-button
+            [routerLink]="['/', 'edit-post', post.postIndex]"
+            color="primary">
+            EDIT
+        </a>
     </mat-card-actions>
 </mat-card>

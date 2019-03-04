@@ -23,6 +23,7 @@ export class EditPostComponent implements OnInit, OnDestroy, ComponentCanDeactiv
     postForm: FormGroup;
     commentForms: FormGroup[] = [];
     unsavedData = false;
+    saving = false;
     firebaseAuthStateUnsubscribe: firebase.Unsubscribe;
 
     constructor(
@@ -222,50 +223,65 @@ export class EditPostComponent implements OnInit, OnDestroy, ComponentCanDeactiv
     }
 
     private updatePostComments(posts: Post[], post: Post) {
-        this.postService.updatePostComments(post)
-            .subscribe(
-                (updatedPost: Post) => {
-                    this.post = updatedPost;
-                    posts[this.post.postIndex] = this.post;
-                    this.appContext.setPosts(posts);
-                    this.initializeCommentForms();
-                },
-                (error) => {
-                    this.navigateToHome();
-                }
-            );
+        if (!this.saving) {
+            this.saving = true;
+            this.postService.updatePostComments(post)
+                .subscribe(
+                    (updatedPost: Post) => {
+                        this.post = updatedPost;
+                        posts[this.post.postIndex] = this.post;
+                        this.appContext.setPosts(posts);
+                        this.initializeCommentForms();
+                        this.saving = false;
+                    },
+                    (error) => {
+                        this.saving = false;
+                        this.navigateToHome();
+                    }
+                );
+        }
     }
 
     private updatePost(posts: Post[], post: Post) {
-        this.postService.updatePost(post)
-            .subscribe(
-                (updatedPost: Post) => {
-                    this.post = updatedPost;
-                    posts[this.post.postIndex] = this.post;
-                    this.appContext.setPosts(posts);
-                    this.initializeForms(this.post);
-                },
-                (error) => {
-                    this.navigateToHome();
-                }
-            );
+        if (!this.saving) {
+            this.saving = true;
+            this.postService.updatePost(post)
+                .subscribe(
+                    (updatedPost: Post) => {
+                        this.post = updatedPost;
+                        posts[this.post.postIndex] = this.post;
+                        this.appContext.setPosts(posts);
+                        this.initializeForms(this.post);
+                        this.saving = false;
+                    },
+                    (error) => {
+                        this.saving = false;
+                        this.navigateToHome();
+                    }
+                );
+        }
     }
 
     private updatePosts(posts: Post[], navigateToLastPost = false) {
-        this.postService.updatePosts(posts)
-            .subscribe(
-                (updatedPosts: Post[]) => {
-                    this.appContext.setPosts(updatedPosts);
-                    if (navigateToLastPost) {
-                        this.post = posts[posts.length - 1];
-                        this.initializeForms(this.post);
-                        this.router.navigate(['/', 'edit-post', this.post.postIndex]);
+        if (!this.saving) {
+            this.saving = true;
+            this.postService.updatePosts(posts)
+                .subscribe(
+                    (updatedPosts: Post[]) => {
+                        this.appContext.setPosts(updatedPosts);
+                        if (navigateToLastPost) {
+                            this.post = updatedPosts[updatedPosts.length - 1];
+                            this.initializeForms(this.post);
+                            this.router.navigate(['/', 'edit-post', this.post.postIndex]);
+                        }
+                        this.saving = false;
+                    },
+                    (error) => {
+                        this.saving = false;
+                        this.navigateToHome();
                     }
-                },
-                (error) => {
-                    this.navigateToHome();
-                }
-            );
+                );
+        }
     }
 
     private getPosts(): Post[] {

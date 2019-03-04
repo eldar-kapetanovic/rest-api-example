@@ -4,6 +4,7 @@
             *ngIf="post.title != undefined"
             [post]="post"
             [authenticated]="authenticated"
+            [saving]="saving"
             (deletePost)="onConfirmPostDeletion($event)">
     </app-post>
     </ng-container>

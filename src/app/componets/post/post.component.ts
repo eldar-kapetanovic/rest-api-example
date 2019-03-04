@@ -11,6 +11,7 @@ import { Post } from '../../models/post.model';
 export class PostComponent implements OnInit {
     @Input() post: Post;
     @Input() authenticated = false;
+    @Input() saving = false;
     @Output() deletePost = new EventEmitter<Post>();
 
     constructor() { }
